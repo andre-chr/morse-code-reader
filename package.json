@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/FIT3140-S1-2017/assignment-5-team17#readme",
   "dependencies": {
-    "events": "^1.1.1"
+    "events": "^1.1.1",
+    "serialport": "^4.0.7"
   }
 }
