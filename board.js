@@ -1,29 +1,19 @@
 'use strict';
 
 const config = require('./config.json');
-const EventEmitter = require('events');
+const BasicBoard = require('./basic_board.js');
 const SerialPort = require('serialport');
 
-class Board extends EventEmitter
+class Board extends BasicBoard
 {
     constructor() {
         super();
-        this._inMotion = null;
-        this._startMotionTime = null;
         this.serialport = new SerialPort(config['board-line'], {
             parser: SerialPort.parsers.readline('\n'),
             autoOpen: false
         });
         this.serialport.on('data', (msg) => {
-            let time = Date.now();
-            if (msg == 0 && this._inMotion === true) {
-                this._inMotion = false;
-                this.emit('end', time - this._startMotionTime);
-            } else if (msg == 1 && this._inMotion === false) {
-                this._inMotion = true;
-                this._startMotionTime = time;
-                this.emit('start');
-            }
+            this._setMotion(msg != 1);
         });
     }
 
@@ -32,14 +22,9 @@ class Board extends EventEmitter
             if (error) {
                 console.log('failed to open SerialPort: ', error.message);
             } else {
-                this._inMotion = false;
-                this.emit('open');
+                super.open();
             }
         });
-    }
-
-    get inMotion() {
-        return this._inMotion;
     }
 }
 
