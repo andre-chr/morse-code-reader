@@ -1,0 +1,8 @@
+{
+    "time-unit": 1000,
+    "short-mark": 1,
+    "long-mark": 3,
+    "letter-gap": 3,
+    "word-gap": 7,
+    "board-line": "/dev/ttyACM0"
+}
