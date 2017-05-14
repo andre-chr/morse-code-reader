@@ -1,8 +1,8 @@
 {
   "name": "assignment-5-team17",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000a\u0000s\u0000s\u0000i\u0000g\u0000n\u0000m\u0000e\u0000n\u0000t\u0000-\u00005\u0000-\u0000t\u0000e\u0000a\u0000m\u00001\u00007\u0000\r\u0000 \u0000#\u0000 \u0000a\u0000s\u0000s\u0000i\u0000g\u0000n\u0000m\u0000e\u0000n\u0000t\u0000-\u00005\u0000-\u0000t\u0000e\u0000a\u0000m\u00001\u00007\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "description": "Application to decode motion signals to characters based on the morse code table",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,9 @@
   "homepage": "https://github.com/FIT3140-S1-2017/assignment-5-team17#readme",
   "dependencies": {
     "events": "^1.1.1",
-    "serialport": "^4.0.7"
+    "serialport": "^4.0.7",
+	"firebase-admin" : "4.2.1",
+	"fs" : "0.0.1-security",
+	"socket.io" : "2.0.1"
   }
 }
