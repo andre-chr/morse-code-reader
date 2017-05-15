@@ -1,10 +1,5 @@
 'use strict';
 
-//import libraries
-var fs = require('fs'), 
-	http = require('http'),
-    socketio = require('socket.io');
-
 // load config file
 const config = require('./config.json');
 // load Board class
@@ -12,15 +7,9 @@ const Board = require('./board.js');
 const Simulator = require('./simulator.js');
 const Firebase = require('./firebase_admin.js');
 
-var server=http.createServer(function(req, res) {
-	res.writeHead(200, { 'Content-type': 'text/html'});
-	res.end(fs.readFileSync('../client/index.html'));
-	}).listen(8080, function() {
-		console.log('Listening at: http://localhost:8080');
- });
-
 //var board = new Board(); // connect to the board
 var board = new Simulator("Hello world!"); // connect to the simulator
+var admin = new Firebase();
 
 board.on('open', () => {
     console.log('board connected');
