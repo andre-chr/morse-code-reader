@@ -42,6 +42,7 @@ var letterInterval, wordInterval;
 
 //var board = new Board(); // connect to the board
 var board = new Simulator("Hello world!"); // connect to the simulator
+var admin = new Firebase();
 
 board.on('open', () => {
     console.log('board connected');
