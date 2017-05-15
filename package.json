@@ -18,9 +18,9 @@
   "homepage": "https://github.com/FIT3140-S1-2017/assignment-5-team17#readme",
   "dependencies": {
     "events": "^1.1.1",
+    "firebase-admin": "^4.2.1",
+    "fs": "0.0.1-security",
     "serialport": "^4.0.7",
-	"firebase-admin" : "4.2.1",
-	"fs" : "0.0.1-security",
-	"socket.io" : "2.0.1"
+    "socket.io": "2.0.1"
   }
 }
