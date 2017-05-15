@@ -8,7 +8,7 @@ class Board extends BasicBoard
 {
     constructor() {
         super();
-        this.serialport = new SerialPort(config['board-line'], {
+        this.serialport = new SerialPort(config['board_line'], {
             parser: SerialPort.parsers.readline('\n'),
             autoOpen: false
         });
