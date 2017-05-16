@@ -6,9 +6,7 @@
 
 const config = require('./config.json');
 const EventEmitter = require('events');
-const Logger = require('./logger.js');
-
-var logger = new Logger('morse_decoder');	//instantiate logger
+var logger = require('./logger.js');
 
 // sets up the decoding table, which is inversed of the morse-table
 var decodingTable = {};

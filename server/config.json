@@ -5,6 +5,8 @@
     "letter-gap": 3,
     "word-gap": 7,
     "board-line": "/dev/ttyACM0",
+    "logger-dir": "log",
+    "logger-file": "server",
     "morse-table": {
         "A": "SL",
         "B": "LSSS",

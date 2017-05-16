@@ -20,9 +20,7 @@ const Board = require('./board.js');				//import board file
 const Simulator = require('./simulator.js');		//import simulator
 const Firebase = require('./firebase_admin.js');	//import firebase file
 const MorseDecoder = require('./morse_decoder.js'); //import MorseDecoder class
-const Logger = require('./logger.js');				//import logger class
-
-var logger = new Logger('server');		//instantiate logger
+var logger = require('./logger.js');				//import logger class
 
 // the firebase admin class, mainly used to communicate with the database
 var admin = new Firebase();
@@ -51,7 +49,7 @@ board.on('end', (time) => {
 });
 // logs and adds a new letter to the message in firebase
 decoder.on('letter', (letter) => {
-	logger.info('detected letter: ' + letter);
+	logger.info('detected letter: \'' + letter + "'");
 	admin.addLetter(letter);
 });
 // logs a short motion and handles motion count
