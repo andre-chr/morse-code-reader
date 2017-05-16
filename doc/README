@@ -1,0 +1,80 @@
+Morse Code Interpreter
+--------------------------------------------
+This project aims to create a Morse Code interpreter. It can connect to a motion
+sensor on an Arduino Uno board, and this sensor can be used to send a message
+using Morse Code with a series of short and long motions.
+
+======================
+Installation
+======================
+To install this app, navigate to its root directory and run the command:
+npm install
+
+This app makes use of JavaScript ECMAScript 6 (es6) features. Node.js has
+incorporated these specifications among several versions. The class features
+were added in version 4.8.3, with most features released by 6.4.0, which came
+out on 2016-08-12. Version 6.4.0 is the recommended minimum for running this
+application.
+
+======================
+Run
+======================
+To run this application, there are two different modes of running.
+
+To run with the Arduino Uno board, follow these instructions:
+Navigate to the server subfolder
+run the command:
+node server.js
+
+To run with a simulator, follow these instructions:
+Navigate to the server subfolder
+run the command:
+node server.js message
+Note: message can be separated into separate arguments, e.g.:
+node server.js Hello world!
+node server.js "Hello world!"
+These two commands result in the same message being simulated.
+
+To run the client, follow these instructions:
+Navigate to the client subfolder
+run the command:
+firebase serve
+Open the URL in that link in a web browser (default: http://localhost:5000)
+
+========================
+Implantations
+========================
+List of user stories and their current state in being implemented.
+
+As an app user, I want to enter data through a motion sensor.
+   Fully implemented.
+As an app user, I want the server to listen to all motion sensor’s signals.
+   Fully implemented.
+As an app user, I want to read the detected motion signals from the server
+console.
+   Fully implemented.
+As an app user, I want the server to determine whether the incoming message is
+long or short.
+   Fully implemented.
+As an app user, I want the client side to receive the motion sensor’s signals.
+   Partially implemented, can only receive a count of motion signals.
+As an app user, I want to decode the motion sensor messages to be decoded into
+English letters based on Morse code coding table.
+   Fully implemented per first iteration, can handle A-Z but not numbers.
+As an app user, I want the client side to print out the decoded messages
+(i.e. the English letters).
+   Fully implemented.
+
+=========================
+Bugs or Limitations
+=========================
+There have been no significant bugs, although insufficient testing has been done
+to fully determine.
+
+One small bug would be with the logger, if the directory name already exists
+as a file, problems are likely to emerge. Will look to fix this in next
+iteration.
+
+A limitation is that there is no in-program way to exit the program. You must
+use Ctrl-C to close it down for both the board and the simulator, even if the
+simulator has finished its message.
