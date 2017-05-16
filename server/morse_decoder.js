@@ -66,6 +66,11 @@ class MorseDecoder extends EventEmitter {
     _endLetter() {
         if (this.code === '') {}
         else if (this.code in decodingTable) {
+            // check if start of new word and send a space (if not first word)
+            if (this.word === '' && this.message !== '') { // start of a new word
+                this.message += ' ';
+                this.emit('letter', ' ');
+            }
             let letter = decodingTable[this.code];
             this.word += letter;
             this.message += letter;
@@ -78,10 +83,6 @@ class MorseDecoder extends EventEmitter {
 
     _endWord() {
         this._endLetter();
-        if (this.word !== '' && this.message !== '') { // start of a new word
-            this.message += ' ';
-            this.emit('letter', ' ');
-        }
         this.word = '';
     }
 }

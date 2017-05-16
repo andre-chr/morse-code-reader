@@ -12,21 +12,20 @@ Client.prototype.initFirebase = function () {
 
 Client.prototype.loadMessages = function () {
   // Reference to the /messages/ database path.
-  this.motionRef = this.database.ref('motionSensorData');
+  this.morseCodeRef = this.database.ref('morseCodeData');
   // Make sure we remove all previous listeners.
-  this.motionRef.off();
+  this.morseCodeRef.off();
 
   var setMessage = function (data) {
-    console.log('message', data);
     var val = data.val();
     this.displayMessage(val.motionCount, val.message);
   }.bind(this);
-  this.motionRef.on('value', setMessage);
+  this.morseCodeRef.on('value', setMessage);
 };
 
 Client.prototype.displayMessage = function (motionCount, message) {
   document.getElementById('no-of-motion').innerText = motionCount;
-  document.getElementById('message').innerText = message;
+  document.getElementById('message').innerText = '"' + message + '"';
 };
 
 // Checks that the Firebase SDK has been correctly setup and configured.
@@ -38,7 +37,6 @@ Client.prototype.checkSetup = function () {
     window.alert('Your Firebase Storage bucket has not been enabled.');
   }
 };
-
 
 window.onload = function () {
   window.Client = new Client();
