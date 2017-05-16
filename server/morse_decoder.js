@@ -152,7 +152,7 @@ class MorseDecoder extends EventEmitter {
         assert(this.board !== null);
         this._endLetter();
         this.word = '';
-		logger.silly('word ended');
+		logger.info('word ended');
     }
 }
 
