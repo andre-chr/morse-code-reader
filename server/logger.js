@@ -1,30 +1,32 @@
-var winston = require('winston');
+'use strict';
+
+const config = require('./config.json');
+const  winston = require('winston');
 const fs = require('fs');
 const env = process.env.NODE_ENV || 'development';
-const logDir = 'log'; // to create a log folder
 
 // Create the log directory if it does not exist
-if (!fs.existsSync(logDir)) { // if the folder is not exist
-	fs.mkdirSync(logDir); // create one
+if (!fs.existsSync(config['logger-dir'])) { // if the folder is not exist
+	fs.mkdirSync(config['logger-dir']); // create one
 }
 
-const tsFormat = function () { // get the current time
-		return (new Date()).toLocaleTimeString();
-};
-	
+// const tsFormat = function () { // get the current time
+//	return (new Date()).toLocaleTimeString();
+// };
+
 class Logger
 {	
-	constructor (filename) {
+	constructor () {
 		this.logger = new (winston.Logger)({
 			 transports: [
 				 new (winston.transports.Console)({
-					 timestamp: tsFormat(), // print out the time
+				     timestamp: true,
 					 colorize : true, // colorize the output
 					 level : env === 'development' ? 'debug' : 'info' //dynamic level
 				 }),
 				 new (winston.transports.File)({
-					 filename : logDir + '/logfile-' + filename + '.txt', // file name
-					 timestamp: tsFormat(), // print out the time
+					 filename : `${config['logger-dir']}/${config['logger-file']}.log`, // file name
+					 timestamp: true, // print out the time
 					 level : env === 'development' ? 'debug' : 'info' //dynamic level
 				})
 			]
@@ -56,4 +58,6 @@ class Logger
 	}
 }
 
-module.exports = Logger;	//export object
+var logger = new Logger()
+
+module.exports = logger;	//export object

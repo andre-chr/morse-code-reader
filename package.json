@@ -19,6 +19,8 @@
   "dependencies": {
     "events": "^1.1.1",
     "firebase-admin": "^4.2.1",
-    "serialport": "^4.0.7"
+    "fs": "0.0.1-security",
+    "serialport": "^4.0.7",
+    "winston": "^2.3.1"
   }
 }

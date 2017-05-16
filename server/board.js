@@ -6,10 +6,8 @@
 
 const config = require('./config.json');
 const BasicBoard = require('./basic_board.js');
-const Logger = require('./logger.js');
 const SerialPort = require('serialport');
-
-var logger = new Logger('board');		//instantiate logger
+var logger = require('./logger.js');
 
 /**
  * The Board class handles a connection to an Arduino Uno board. Expected behavior

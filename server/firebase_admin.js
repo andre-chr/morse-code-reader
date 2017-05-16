@@ -1,12 +1,9 @@
 'use strict';
 
 const admin = require('firebase-admin');
-
 // Fetch the service account key JSON file contents
 const serviceAccount = require('./serviceAccountKey.json');
-
-const Logger = require('./logger.js');
-var logger = new Logger('firebase_admin');	//instantiate logger
+var logger = require('./logger.js');
 
 // Initialize the app with a service account, granting admin privileges
 admin.initializeApp({
