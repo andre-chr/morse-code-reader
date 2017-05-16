@@ -16,8 +16,10 @@ class Firebase
 	constructor() {
 		// As an admin, the app has access to read and write all data, regardless of Security Rules
 		this.db = admin.database();
-		this.ref = this.db.ref("motionSensorData"); // channel name
+		this.ref = this.db.ref('morseCodeData'); // channel name
 		this.resetDb();		//resets database
+		this.motionCount = 0;
+		this.message = '';
 	}
 
 
@@ -28,15 +30,17 @@ class Firebase
 		});
 	}
 
-	updateCount(count) {
+	incMotions() {
+		this.motionCount += 1;
 		this.ref.update({
-			motionCount: count
+			motionCount: this.motionCount
 		});
 	}
 
-	updateMessage(msg) {
+	addLetter(letter) {
+		this.message += letter;
 		this.ref.update({
-			message: msg
+			message: this.message
 		}).then(() => {
 			console.log('Message updated!');
 		});
