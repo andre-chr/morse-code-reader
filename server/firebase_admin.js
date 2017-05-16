@@ -8,7 +8,7 @@ const serviceAccount = require('./serviceAccountKey.json');
 // Initialize the app with a service account, granting admin privileges
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://project1-9aa9d.firebaseio.com"  // IMPORTANT: repalce the url with yours 
+  databaseURL: "https://morse-code-decoder-213b9.firebaseio.com/"
 });
 
 class Firebase
@@ -19,6 +19,7 @@ class Firebase
 		this.ref = this.db.ref("motionSensorData"); // channel name
 		this.resetDb();		//resets database
 	}
+
 
 	resetDb() {
 		this.ref.set({
