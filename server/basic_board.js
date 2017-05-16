@@ -4,8 +4,7 @@ const config = require('./config.json');
 const EventEmitter = require('events');
 const SerialPort = require('serialport');
 
-class BasicBoard extends EventEmitter
-{
+class BasicBoard extends EventEmitter {
     constructor() {
         super();
         this._inMotion = null;
@@ -20,6 +19,14 @@ class BasicBoard extends EventEmitter
 
     get inMotion() {
         return this._inMotion;
+    }
+
+    get shortMark() {
+        return config['short-mark'];
+    }
+
+    get longMark() {
+        return config['long-mark'];
     }
 
     _setMotion(value) {

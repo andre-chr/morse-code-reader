@@ -4,8 +4,7 @@ const config = require('./config.json');
 const BasicBoard = require('./basic_board.js');
 const SerialPort = require('serialport');
 
-class Board extends BasicBoard
-{
+class Board extends BasicBoard {
     constructor() {
         super();
         this.serialport = new SerialPort(config['board_line'], {
@@ -25,6 +24,14 @@ class Board extends BasicBoard
                 super.open();
             }
         });
+    }
+
+    get shortMark() {
+        return 5; // board generally takes at least 5 seconds
+    }
+
+    get longMark() {
+        return 8;
     }
 }
 

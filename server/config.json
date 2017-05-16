@@ -31,35 +31,6 @@
         "W": "SLL",
         "X": "LSSL",
         "Y": "LSLL",
-        "Z": "LLSS",
-        "SK": "LLSSLL"
-    },
-    "morse-decoder": {
-        "SL" : "A",
-        "LSSS" : "B",
-        "LSLS" : "C",
-        "LSS" : "D",
-        "S" : "E",
-        "SSLS" : "F",
-        "LLS" : "G",
-        "SSSS" : "H",
-        "SS" : "I",
-        "SLLL" : "J",
-        "LSL" : "K",
-        "SLSS" : "L",
-        "LL" : "M",
-        "LS" : "N",
-        "LLL" : "O",
-        "SLLS" : "P",
-        "LLSL" : "Q",
-        "SLS" : "R",
-        "SSS" : "S",
-        "L" : "T",
-        "SSL" : "U",
-        "SSSL" : "V",
-        "SLL" : "W",
-        "LSSL" : "X",
-        "LSLL" : "Y",
-        "LLSS" : "Z"
+        "Z": "LLSS"
     }
 }
