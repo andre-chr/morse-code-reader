@@ -24,7 +24,7 @@ class Board extends BasicBoard {
         });
         // when data is recived, update inMotion
         this.serialport.on('data', (msg) => {
-            this._setMotion(msg != 1);
+            this._setMotion(msg != 0);
         });
     }
 
@@ -46,7 +46,7 @@ class Board extends BasicBoard {
      * The board generally takes at least 5 seconds to handle a short motion.
      */
     get shortMark() {
-        return 5; // board generally takes at least 5 seconds
+        return 4; // board generally takes at least 5 seconds
     }
 
     /**
