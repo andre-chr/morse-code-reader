@@ -16,6 +16,8 @@ class Simulator extends BasicBoard
     /**
      * Will construct the Simulator, setting up the message in a schedule.
      * @param message A string that contains the message to simulate.
+	 * @pre None
+	 * @post None
      */
     constructor(message) {
         super();
@@ -33,6 +35,8 @@ class Simulator extends BasicBoard
     /**
      * Will start the simulator, setting the first event in the schedule to
      * start in 5 seconds.
+     * @pre None
+     * @post None
      */
     open() {
         this._at = 0;
@@ -43,6 +47,8 @@ class Simulator extends BasicBoard
     /**
      * Adds a word to the message. The word-gap will be handle automatically.
      * @param word A string containing one word, a string of characters.
+     * @pre None
+     * @post None
      */
     _addWord(word) {
         // if message is not the first word, add the word-gap
@@ -63,6 +69,8 @@ class Simulator extends BasicBoard
      * Adds the code to the schedule as a single letter. Letter-gap will be
      * added automatically when needed.
      * @param code A string of 'S' or 'L' that make up a letter.
+     * @pre None
+     * @post None
      */
     _addLetter(code) {
         // if is not the first letter, add the letter-gap
@@ -82,6 +90,8 @@ class Simulator extends BasicBoard
      * time doing nothing. The duration will add a random amount of time.
      * @param time An integer with the duration the event runs for in time-unit.
      * @param signal Type of event, true for a motion, false for a delay (wait)
+     * @pre None
+     * @post None
      */
     _addEvent(time, signal) {
         // random time from 20-800 ms
@@ -96,6 +106,8 @@ class Simulator extends BasicBoard
      * @param close A boolean, true when a motion is running and needs to end,
      *              will re-run with a random delay on this case. False when
      *              to run the next iteration.
+     * @pre Is opened
+     * @post None
      */
     _nextEvent(close) {
         // process event

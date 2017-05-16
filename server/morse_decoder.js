@@ -7,6 +7,7 @@
 const config = require('./config.json');
 const EventEmitter = require('events');
 var logger = require('./logger.js');
+const assert = require('assert');
 
 // sets up the decoding table, which is inversed of the morse-table
 var decodingTable = {};
@@ -28,6 +29,8 @@ for (var key in config['morse-table']) {
 class MorseDecoder extends EventEmitter {
     /**
      * Initialises the MorseDecoder class, setup the base values in the variables.
+	 * @pre None
+	 * @post None
      */
     constructor() {
         super();
@@ -47,7 +50,9 @@ class MorseDecoder extends EventEmitter {
     /**
      * Will connect a board to the decoder, a decoder can only be connected to
      * one board, while a single board can be connected to the decoder.
-     * @param board 
+     * @param board The board class to connect to. Must be derived from BasicBoard
+	 * @pre this.board !== null
+	 * @post None
      */
     connect(board) {
         // checks if a previous connection has already been made
@@ -67,8 +72,11 @@ class MorseDecoder extends EventEmitter {
     /**
      * A motion has started.
      * @param time The time in milliseconds since the last motion ended.
+	 * @pre this.board !== null
+	 * @post None
      */
     _signalStart(time) {
+        assert(this.board !== null);
         // a timer was set to auto-end a word, with a new motion detected, end
         // that timer before it is called
         if (this.timeoutid !== null) {
@@ -87,8 +95,11 @@ class MorseDecoder extends EventEmitter {
     /**
      * A motion has ended.
      * @param time The time in milliseconds since the motion started.
+	 * @pre this.board !== null
+	 * @post None
      */
     _signalEnd(time) {
+        assert(this.board !== null);
         // handle whether motion is short or long
         if (time < this.duration.short) { // too short
             this.emit('bad-mark', time);
@@ -109,8 +120,11 @@ class MorseDecoder extends EventEmitter {
      * An end of letter has been detected. Will determain which letter it is (if
      * any) and emit an event. Will also detect if first letter of a new word
      * and emit a event with a space.
+	 * @pre this.board !== null
+	 * @post None
      */
     _endLetter() {
+        assert(this.board !== null);
         if (this.code === '') {} // empty letter, do nothing
         else if (this.code in decodingTable) { // code found in table
             // check if start of new word and send a space (if not first word)
@@ -131,8 +145,11 @@ class MorseDecoder extends EventEmitter {
     /**
      * Ends the current word, mainly ends the letter and reset the word to
      * being empty.
+	 * @pre this.board !== null
+	 * @post None
      */
     _endWord() {
+        assert(this.board !== null);
         this._endLetter();
         this.word = '';
 		logger.silly('word ended');

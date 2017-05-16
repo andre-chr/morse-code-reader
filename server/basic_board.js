@@ -9,6 +9,7 @@
 const config = require('./config.json');
 const EventEmitter = require('events');
 const SerialPort = require('serialport');
+const assert = require('assert');
 
 /**
  * BasicBoard class enables the basic functionality for all morse code boards.
@@ -21,6 +22,8 @@ const SerialPort = require('serialport');
 class BasicBoard extends EventEmitter {
     /**
      * Will construct the board, but does not open it for reciving signals.
+     * @pre None
+     * @post None
      */
     constructor() {
         super();
@@ -31,6 +34,8 @@ class BasicBoard extends EventEmitter {
     /**
      * Will open the board for reading. Should be called by child class once the
      * board is ready.
+     * @pre None
+     * @post None
      */
     open() {
         this._inMotion = false;
@@ -39,7 +44,10 @@ class BasicBoard extends EventEmitter {
     }
 
     /**
-     * Will return true when a motion has started but not ended, false otherwise
+     * Will return true when a motion has started but not ended, false otherwise.
+     * @returns true on motion detect, false on motion ended, null if not opened
+     * @pre None
+     * @post None
      */
     get inMotion() {
         return this._inMotion;
@@ -48,6 +56,9 @@ class BasicBoard extends EventEmitter {
     /**
      * Some boards have differing timing, so this will return how many
      * time-unit's is required to get a short motion.
+     * @returns The short mark in time-unit's.
+     * @pre None
+     * @post None
      */
     get shortMark() {
         return config['short-mark']; // defaults to short-mark in config
@@ -56,6 +67,9 @@ class BasicBoard extends EventEmitter {
     /**
      * Some boards have differing timing, so this will return how many
      * time-unit's is required to get a long motion.
+     * @returns The long mark in time-unit's.
+     * @pre None
+     * @post None
      */
     get longMark() {
         return config['long-mark']; // defaults to long-mark in config
@@ -66,8 +80,11 @@ class BasicBoard extends EventEmitter {
      * either start or end  events. Note: these events will not be triggered if
      * no change to inMotion is made.
      * @param value The value to set inMotion, true or false.
+     * @pre Board opened
+     * @post None
      */
     _setMotion(value) {
+        assert(this._inMotion !== null, "Board must be open");
         let time = Date.now();
         if (value === false && this._inMotion === true) {
             this._inMotion = false;

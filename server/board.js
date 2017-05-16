@@ -17,6 +17,8 @@ var logger = require('./logger.js');
 class Board extends BasicBoard {
     /**
      * Constructs the board, will setup the serialport class but will not open.
+     * @pre None
+     * @post None
      */
     constructor() {
         super();
@@ -33,6 +35,8 @@ class Board extends BasicBoard {
     /**
      * Opens the file in asynchronous, on error a message is logged to console.
      * Once board is connected, will issue an open event.
+     * @pre None
+     * @post None
      */
     open() {
         this.serialport.open((error) => {
@@ -46,6 +50,9 @@ class Board extends BasicBoard {
 
     /**
      * The board generally takes at least 5 seconds to handle a short motion.
+     * @returns The short mark in time-unit's.
+     * @pre None
+     * @post None
      */
     get shortMark() {
         return 4; // board generally takes at least 5 seconds
@@ -53,6 +60,9 @@ class Board extends BasicBoard {
 
     /**
      * With a longer short motion, a longer long motion is needed as well.
+     * @returns The long mark in time-unit's.
+     * @pre None
+     * @post None
      */
     get longMark() {
         return 8;
