@@ -18,7 +18,7 @@
 const config = require('./config.json');			//import config file
 const Board = require('./board.js');				//import board file
 const Simulator = require('./simulator.js');		//import simulator
-const Firebase = require('./firebase_admin.js');	//import firebase file
+const Firebase = require('./firebase.js');	//import firebase file
 const MorseDecoder = require('./morse_decoder.js'); //import MorseDecoder class
 var logger = require('./logger.js');				//import logger class
 

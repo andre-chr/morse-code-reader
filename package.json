@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/FIT3140-S1-2017/assignment-5-team17#readme",
   "dependencies": {
+    "assert": "^1.4.1",
     "events": "^1.1.1",
     "firebase-admin": "^4.2.1",
     "fs": "0.0.1-security",
