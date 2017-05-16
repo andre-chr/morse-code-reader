@@ -5,6 +5,9 @@ const admin = require('firebase-admin');
 // Fetch the service account key JSON file contents
 const serviceAccount = require('./serviceAccountKey.json');
 
+const Logger = require('./logger.js');
+var logger = new Logger('firebase_admin');	//instantiate logger
+
 // Initialize the app with a service account, granting admin privileges
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -35,6 +38,7 @@ class Firebase
 		this.ref.update({
 			motionCount: this.motionCount
 		});
+		logger.silly('motion counter updated!')
 	}
 
 	addLetter(letter) {
@@ -42,7 +46,7 @@ class Firebase
 		this.ref.update({
 			message: this.message
 		}).then(() => {
-			console.log('Message updated!');
+			logger.silly('Message updated!');
 		});
 	}
 }

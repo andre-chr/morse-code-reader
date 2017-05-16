@@ -1,5 +1,4 @@
 'use strict';
-
 //import libraries
 //var fs = require('fs'), 
 //	http = require('http');
@@ -10,6 +9,9 @@ const Board = require('./board.js');				//import board file
 const Simulator = require('./simulator.js');		//import simulator
 const Firebase = require('./firebase_admin.js');	//import firebase file
 const MorseDecoder = require('./morse_decoder.js'); //import MorseDecoder class
+const Logger = require('./logger.js');				//import logger class
+
+var logger = new Logger('server');		//instantiate logger
 
 /*
 var server=http.createServer(function(req, res) {
@@ -22,39 +24,39 @@ var server=http.createServer(function(req, res) {
 
 var admin = new Firebase();
 //var board = new Board(); // connect to the board
-var board = new Simulator("Hello world!"); // connect to the simulator
+var board = new Simulator("Hello world!"); 	// connect to the simulator
 var decoder = new MorseDecoder;
 
 board.on('open', () => {
-    console.log('board connected');
+    logger.info('board connected');
 });
 
 //triggers when motion starts
 board.on('start', (time) => {
-    console.log('motion start; delay: ', time, ' ms');
+    logger.silly('motion start; delay: ' + time + ' ms');
 });
 //triggers when motion ends
 board.on('end', (time) => {
-    console.log('motion end; duration: ', time, ' ms');
+    logger.silly('motion end; duration: ' + time + ' ms');
 });
 
 decoder.on('letter', (letter) => {
-	console.log('detected letter: ', letter);
+	logger.info('detected letter: ' + letter);
 	admin.addLetter(letter);
 });
 decoder.on('short', (time) => {
-	console.log('detected short mark');
+	logger.silly('detected short mark');
 	admin.incMotions();
 });
 decoder.on('long', (time) => {
-	console.log('detected long mark');
+	logger.silly('detected long mark');
 	admin.incMotions();
 });
 decoder.on('bad-letter', (code) => {
-	console.log('unknown sequence: ', code);
+	logger.warn('unknown sequence: ', code);
 });
 decoder.on('bad-mark', (time) => {
-	console.log('unknown mark; possibly too short');
+	logger.warn('unknown mark; possibly too short');
 });
 decoder.connect(board);
 board.open();

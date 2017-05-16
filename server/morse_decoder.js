@@ -2,6 +2,9 @@
 
 const config = require('./config.json');
 const EventEmitter = require('events');
+const Logger = require('./logger.js');
+
+var logger = new Logger('morse_decoder');	//instantiate logger
 
 var decodingTable = {};
 for (var key in config['morse-table']) {
@@ -56,9 +59,11 @@ class MorseDecoder extends EventEmitter {
         else if (time < this.duration.long) {
             this.code += 'S';
             this.emit('short', time);
+			logger.debug('detected motion: S');
         } else {
             this.code += 'L';
             this.emit('long', time);
+			logger.debug('detected motion: L');
         }
         this.timeoutid = setTimeout(() => { this._endWord(); }, this.duration.word + 2000);
     }
@@ -84,6 +89,7 @@ class MorseDecoder extends EventEmitter {
     _endWord() {
         this._endLetter();
         this.word = '';
+		logger.silly('word ended');
     }
 }
 
