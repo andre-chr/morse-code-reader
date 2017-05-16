@@ -11,10 +11,8 @@ Client.prototype.initFirebase = function () {
 
 
 Client.prototype.loadMessages = function () {
-  // Reference to the /messages/ database path.
-  this.morseCodeRef = this.database.ref('morseCodeData');
-  // Make sure we remove all previous listeners.
-  this.morseCodeRef.off();
+  this.morseCodeRef = this.database.ref('morseCodeData');		//get database reference
+  this.morseCodeRef.off();		//remove listeners
 
   var setMessage = function (data) {
     var val = data.val();
@@ -24,8 +22,8 @@ Client.prototype.loadMessages = function () {
 };
 
 Client.prototype.displayMessage = function (motionCount, message) {
-  document.getElementById('no-of-motion').innerText = motionCount;
-  document.getElementById('message').innerText = '"' + message + '"';
+  document.getElementById('no-of-motion').innerText = motionCount;		//update count
+  document.getElementById('message').innerText = '"' + message + '"';	//update message
 };
 
 // Checks that the Firebase SDK has been correctly setup and configured.
