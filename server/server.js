@@ -41,11 +41,11 @@ board.on('open', () => {
 });
 // logs when a motion has started
 board.on('start', (time) => {
-    logger.silly('motion start; delay: ' + time + ' ms');
+    logger.info('motion start; delay: ' + time + ' ms');
 });
 // logs when a motion has ended
 board.on('end', (time) => {
-    logger.silly('motion end; duration: ' + time + ' ms');
+    logger.info('motion end; duration: ' + time + ' ms');
 });
 // logs and adds a new letter to the message in firebase
 decoder.on('letter', (letter) => {
@@ -54,12 +54,12 @@ decoder.on('letter', (letter) => {
 });
 // logs a short motion and handles motion count
 decoder.on('short', (time) => {
-	logger.silly('detected short mark');
+	logger.info('detected short motion');
 	admin.incMotions();
 });
 // logs a long motion and handles motion count
 decoder.on('long', (time) => {
-	logger.silly('detected long mark');
+	logger.info('detected long motion');
 	admin.incMotions();
 });
 // when the user imputs a non-existant letter, logs
