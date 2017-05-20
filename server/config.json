@@ -33,6 +33,17 @@
         "W": "SLL",
         "X": "LSSL",
         "Y": "LSLL",
-        "Z": "LLSS"
+        "Z": "LLSS",
+        "0": "LLLLL",
+        "1": "SLLLL",
+        "2": "SSLLL",
+        "3": "SSSLL",
+        "4": "SSSSL",
+        "5": "SSSSS",
+        "6": "LSSSS",
+        "7": "LLSSS",
+        "8": "LLLSS",
+        "9": "LLLLS",
+        "SK": "SSSLSL"
     }
 }
