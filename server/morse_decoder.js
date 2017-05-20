@@ -68,6 +68,14 @@ class MorseDecoder extends EventEmitter {
         board.on('start', time => this._signalStart(time));
         board.on('end', time => this._signalEnd(time));
     }
+	
+	disconnect() {
+		//remove all listeners
+		this.board.removeAllListeners();
+		this.board = null;
+		this.duration.short = -1;
+		this.duration.long = -1;
+	}
 
     /**
      * A motion has started.
@@ -127,15 +135,22 @@ class MorseDecoder extends EventEmitter {
         assert(this.board !== null);
         if (this.code === '') {} // empty letter, do nothing
         else if (this.code in decodingTable) { // code found in table
-            // check if start of new word and send a space (if not first word)
-            if (this.word === '' && this.message !== '') { // start of a new word
-                this.message += ' ';
-                this.emit('letter', ' ');
-            }
-            let letter = decodingTable[this.code];
-            this.word += letter; // append letter to current word
-            this.message += letter; // append letter to current message
-            this.emit('letter', letter);
+			let letter = decodingTable[this.code];
+			//check if the letter is a signal for end of transmission
+			if (letter === 'SK') {
+				clearTimeout(this.timeoutid);	//clear end word timer
+				this.timeoutid = null;
+				this.emit('end-transmission');
+			} else {
+				// check if start of new word and send a space (if not first word)
+				if (this.word === '' && this.message !== '') { // start of a new word
+					this.message += ' ';
+					this.emit('letter', ' ');
+				}
+				this.word += letter; // append letter to current word
+				this.message += letter; // append letter to current message
+				this.emit('letter', letter);
+			}
         } else { // letter code not found
             this.emit('bad-letter', this.code);
         }

@@ -44,6 +44,17 @@
         "7": "LLSSS",
         "8": "LLLSS",
         "9": "LLLLS",
+		".": "SLSLSL",
+		",": "LLSSLL",
+		":": "LLLSSS",
+		"?": "SSLLSS",
+		"'": "SLLLLS",
+		"-": "LSSSSL",
+		"/": "LSSLS",
+		"(": "LSLLSL",
+		"\"": "SLSSLS",
+		"@": "SLLSLS",
+		"=": "LSSSL",
         "SK": "SSSLSL"
     }
 }

@@ -35,43 +35,61 @@ if (process.argv.length > 2) { // parameters means pass to simulator
 // handles the signals received from the board and decodes the morse code message
 var decoder = new MorseDecoder();
 
-// logs when the board has established connection
-board.on('open', () => {
-    logger.info('board connected');
-});
-// logs when a motion has started
-board.on('start', (time) => {
-    logger.info('motion start; delay: ' + time + ' ms');
-});
-// logs when a motion has ended
-board.on('end', (time) => {
-    logger.info('motion end; duration: ' + time + ' ms');
-});
-// logs and adds a new letter to the message in firebase
-decoder.on('letter', (letter) => {
-	logger.info('detected letter: \'' + letter + "'");
-	admin.addLetter(letter);
-});
-// logs a short motion and handles motion count
-decoder.on('short', (time) => {
-	logger.info('detected short motion');
-	admin.incMotions();
-});
-// logs a long motion and handles motion count
-decoder.on('long', (time) => {
-	logger.info('detected long motion');
-	admin.incMotions();
-});
-// when the user imputs a non-existant letter, logs
-decoder.on('bad-letter', (code) => {
-	logger.warn('unknown sequence: ', code);
-});
-// when the user signal is too short, logs
-decoder.on('bad-mark', (time) => {
-	logger.warn('unknown mark; possibly too short');
-});
+function startTransmission() {
+	// logs when the board has established connection
+	board.on('open', () => {
+		logger.info('board connected');
+	});
+	// logs when a motion has started
+	board.on('start', (time) => {
+		logger.silly('motion start; delay: ' + time + ' ms');
+	});
+	// logs when a motion has ended
+	board.on('end', (time) => {
+		logger.silly('motion end; duration: ' + time + ' ms');
+	});
+	
+	// logs and adds a new letter to the message in firebase
+	decoder.on('letter', (letter) => {
+		logger.info('detected letter: \'' + letter + "'");
+		admin.addLetter(letter);
+	});
+	// logs a short motion and handles motion count
+	decoder.on('short', (time) => {
+		logger.silly('detected short motion');
+		admin.incMotions();
+	});
+	// logs a long motion and handles motion count
+	decoder.on('long', (time) => {
+		logger.silly('detected long motion');
+		admin.incMotions();
+	});
+	//when end of transmission signal is received
+	decoder.on('end-of-transmission', () => {
+		endTransmission();
+	});
+	// when the user imputs a non-existant letter, logs
+	decoder.on('bad-letter', (code) => {
+		logger.warn('unknown sequence: ', code);
+	});
+	// when the user signal is too short, logs
+	decoder.on('bad-mark', (time) => {
+		logger.warn('unknown mark; possibly too short');
+	});
+	
+	// connects the board to the decoder, so that the decoder can recieve signals
+	decoder.connect(board);
+	// opens up a connection to the board, this is where the program will really start
+	board.open();
+}
 
-// connects the board to the decoder, so that the decoder can recieve signals
-decoder.connect(board);
-// opens up a connection to the board, this is where the program will really start
-board.open();
+function endTransmission() {
+	//disconnect the decoder
+	decoder.disconnect();
+	
+	//remove all listeners
+	board.removeAllListeners();
+	decoder.removeAllListeners();	
+}
+
+startTransmission();
