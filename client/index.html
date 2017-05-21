@@ -2,19 +2,31 @@
 <html>
 <head>
 	<title>Morse Code Decoder</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-	<table>
-	<tr>
-		<td>Number of motions:</td>
-		<td id="no-of-motion">0</td>
-	</tr>
-	<tr>
-		<td>Decoded message:</td>
-		<td id="message"></td>
-	</tr>
-	</table>
-	
+	<h1>Morse Code Decoder</h1>
+	<div id="content">
+		<table class="full">
+		<tr>
+			<td width=60%>Transmission</td>
+			<td width=40%>
+				<label class="switch">
+				  <input type="checkbox">
+				  <div class="slider"></div>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>Number of motions</td>
+			<td id="no-of-motion">0</td>
+		</tr>
+		<tr>
+			<td>Decoded message</td>
+			<td id="message"></td>
+		</tr>
+		</table>
+	</div>
 	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 	<script>
 		// Initialize Firebase

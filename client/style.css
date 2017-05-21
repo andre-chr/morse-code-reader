@@ -1,0 +1,87 @@
+body {
+	background-color: #668cff;
+	font-family: helvetica, arial;
+}
+
+h1{
+	font: bold 40px/3 "Lucida Console", Monaco, monospace;
+	text-align: center;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+	color: black;
+	text-align: left;
+	font-family: helvetica, arial;
+	padding: 10px;
+}
+
+#content {
+	background-color: #f2f2f2;
+	box-sizing: content-box;
+	width: 50%;
+	height: 50%;
+	top: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	font: normal 16px/1 "Times New Roman", Times, serif;
+	color: rgba(255,255,255,1);
+	text-align: center;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	-webkit-box-shadow: 3px 3px 18px 3px rgba(4,7,10,0.91) ;
+	box-shadow: 3px 3px 18px 3px rgba(4,7,10,0.91) ;
+}
+
+.full {width: 100%;}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+
+
