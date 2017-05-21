@@ -38,6 +38,7 @@ class MorseDecoder extends EventEmitter {
         this.message = '';
         this.word = '';
         this.code = '';
+		this.parFlag = false;
         this.timeoutid = null;
         this.duration = {
             short: -1, // the short motion time, taken from the board
@@ -146,6 +147,16 @@ class MorseDecoder extends EventEmitter {
 				if (this.word === '' && this.message !== '') { // start of a new word
 					this.message += ' ';
 					this.emit('letter', ' ');
+				}
+				
+				//check if there is an open parenthesis in the message
+				if (letter === '(') {
+						if (this.parFlag) {
+							letter = ')';
+							this.parFlag = false;
+						} else {
+							this.parFlag = true;
+						}
 				}
 				this.word += letter; // append letter to current word
 				this.message += letter; // append letter to current message
